@@ -4,8 +4,99 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <ui:composition template="/components/header.xhtml">
    <ui:define name="content">
-      <h1>Finalisation de la Commande</h1>
-      <h:outputText value="Merci pour votre achat !" />
+      <style>
+         /* General Styling */
+         body {
+            background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+         }
+
+         /* Gradient Animation */
+         @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+         }
+
+         /* Content Container */
+         .container {
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+         }
+
+         h1 {
+            font-size: 2.8em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+         }
+
+         .confirmation-message {
+            font-size: 1.4em;
+            color: #444;
+            margin: 20px 0;
+            font-weight: 500;
+         }
+
+         /* Font Awesome Icon Styling */
+         .confirmation-icon {
+            font-size: 4em;
+            color: #28a745;
+            margin-bottom: 20px;
+         }
+
+         /* Button Styling */
+         .return-button {
+            background: linear-gradient(145deg, #4facfe, #00f2fe);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+         }
+
+         .return-button i {
+            margin-right: 10px;
+         }
+
+         .return-button:hover {
+            background: linear-gradient(145deg, #00f2fe, #4facfe);
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+         }
+      </style>
+
+      <div class="container">
+         <!-- Font Awesome Success Icon -->
+         <i class="fas fa-check-circle confirmation-icon"></i>
+
+         <!-- Confirmation Message -->
+         <h1>Commande Confirmée</h1>
+         <p class="confirmation-message">Merci pour votre achat ! Votre commande a été finalisée avec succès.</p>
+
+         <!-- Return Button -->
+         <a href="client/clientDashboard.xhtml" class="return-button">
+            <i class="fas fa-arrow-left"></i> Retour au Tableau de Bord
+         </a>
+      </div>
    </ui:define>
 </ui:composition>
 </html>

@@ -4,21 +4,131 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Mon Panier</title>
+    <!-- Include Font Awesome and Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        /* Background Styling */
+        body {
+            background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Gradient Animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container Styling */
+        .container {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.4em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* DataTable Styling */
+        .ui-datatable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ui-datatable th {
+            background: linear-gradient(145deg, #4facfe, #00f2fe);
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 12px 15px;
+        }
+
+        .ui-datatable td {
+            background: #fff;
+            color: #333;
+            text-align: center;
+            padding: 12px 15px;
+        }
+
+        .ui-datatable tr:nth-child(even) td {
+            background: #f9f9f9;
+        }
+
+        /* Button Styling */
+        .finalize-button {
+            margin: 20px auto;
+            display: block;
+            background: linear-gradient(145deg, #28a745, #218838);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .finalize-button i {
+            margin-right: 10px;
+        }
+
+        .finalize-button:hover {
+            background: linear-gradient(145deg, #218838, #28a745);
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </h:head>
 <h:body>
-    <h:form>
-        <p:dataTable value="#{lignePanierBean.lignesPanier}" var="ligne" paginator="true" rows="10">
-            <p:column headerText="Produit">
-                <h:outputText value="#{ligne.produit.nom}" />
-            </p:column>
-            <p:column headerText="Quantité">
-                <h:outputText value="#{ligne.quantite}" />
-            </p:column>
-            <p:column headerText="Prix Total">
-                <h:outputText value="#{ligne.quantite * ligne.produit.prix}" />
-            </p:column>
-        </p:dataTable>
-        <p:commandButton value="Finaliser la commande" icon="pi pi-shopping-cart" action="#{panierBean.finalizeCart}" />
-    </h:form>
+    <div class="container">
+        <!-- Page Title -->
+        <h1>Mon Panier</h1>
+        <h:form>
+            <!-- Data Table -->
+            <p:dataTable value="#{lignePanierBean.lignesPanier}" var="ligne" paginator="true" rows="10">
+                <!-- Product Column -->
+                <p:column headerText="Produit">
+                    <h:outputText value="#{ligne.produit.nom}" />
+                </p:column>
+
+                <!-- Quantity Column -->
+                <p:column headerText="Quantité">
+                    <h:outputText value="#{ligne.quantite}" />
+                </p:column>
+
+                <!-- Total Price Column -->
+                <p:column headerText="Prix Total">
+                    <h:outputText value="#{ligne.quantite * ligne.produit.prix}" />
+                </p:column>
+            </p:dataTable>
+
+            <!-- Finalize Button -->
+            <button class="finalize-button" onclick="#{panierBean.finalizeCart}">
+                <i class="fas fa-shopping-cart"></i> Finaliser la commande
+            </button>
+        </h:form>
+    </div>
 </h:body>
 </html>

@@ -8,7 +8,9 @@
         <class>ma.fstt.model.User</class>
         <class>ma.fstt.model.Panier</class>
         <class>ma.fstt.model.Produit</class>
-        <class>ma.fstt.model.LignePanier</class>        <properties>
+        <class>ma.fstt.model.LignePanier</class>
+
+        <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/EcommerceLSI"/>
             <property name="jakarta.persistence.jdbc.user" value="root"/>

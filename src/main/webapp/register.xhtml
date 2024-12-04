@@ -5,35 +5,148 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
    <title>Inscription</title>
+   <!-- Include Font Awesome and Google Fonts -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+   <style>
+      /* Background Styling */
+      body {
+         background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+         background-size: 400% 400%;
+         animation: gradientBG 8s ease infinite;
+         font-family: 'Montserrat', sans-serif;
+         margin: 0;
+         padding: 0;
+      }
+
+      /* Gradient Animation */
+      @keyframes gradientBG {
+         0% { background-position: 0% 50%; }
+         50% { background-position: 100% 50%; }
+         100% { background-position: 0% 50%; }
+      }
+
+      /* Center the form */
+      .center-panel {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         padding: 20px;
+      }
+
+      /* Panel Styling */
+      .custom-panel {
+         background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(245, 245, 245, 0.9));
+         border-radius: 25px; /* Smooth Rounded Corners */
+         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3); /* Depth Effect */
+         padding: 50px 40px;
+         text-align: center;
+         max-width: 500px;
+         width: 100%;
+      }
+
+      /* Header Styling */
+      .custom-panel h2 {
+         font-size: 2.6em;
+         color: #333;
+         margin-bottom: 20px;
+         font-weight: 700;
+         text-transform: uppercase;
+         letter-spacing: 1.5px;
+      }
+
+      /* Input Fields */
+      .custom-panel p\:inputText,
+      .custom-panel p\:password,
+      .custom-panel p\:calendar {
+         width: 100%;
+         margin-bottom: 20px;
+         padding: 15px;
+         border-radius: 12px;
+         border: 1px solid #ccc;
+         font-size: 1.1em;
+         box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.1);
+         transition: all 0.3s ease-in-out;
+      }
+
+      .custom-panel p\:inputText:focus,
+      .custom-panel p\:password:focus,
+      .custom-panel p\:calendar:focus {
+         border-color: #007bff;
+         box-shadow: inset 0px 3px 6px rgba(0, 123, 255, 0.2);
+         outline: none;
+      }
+
+      /* Button Styling */
+      .custom-panel p\:commandButton {
+         margin: 20px 0;
+         width: 100%;
+         padding: 15px;
+         font-size: 1.3em;
+         font-weight: 600;
+         border-radius: 15px; /* Smooth Rounded Button */
+         border: none;
+         cursor: pointer;
+         transition: all 0.3s ease-in-out;
+         text-transform: uppercase;
+         letter-spacing: 1px;
+         background: linear-gradient(145deg, #4facfe, #00f2fe);
+         color: #fff;
+         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .custom-panel p\:commandButton:hover {
+         background: linear-gradient(145deg, #00f2fe, #4facfe);
+         transform: translateY(-2px);
+         box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Messages Styling */
+      .custom-panel p\:messages {
+         margin-bottom: 20px;
+         color: #ff3333;
+         font-size: 1.1em;
+         font-weight: 500;
+      }
+
+      /* Placeholder Styling */
+      .custom-panel ::placeholder {
+         color: #aaa;
+         font-size: 0.95em;
+      }
+   </style>
 </h:head>
 <h:body>
-   <h:form>
-      <p:panel header="Inscription">
-         <!-- Messages pour afficher les erreurs ou confirmations -->
-         <p:messages autoUpdate="true" />
+   <div class="center-panel">
+      <h:form>
+         <p:panel class="custom-panel">
+            <h2>Inscription</h2>
+            <p:messages autoUpdate="true" />
 
-         <!-- Champ pour le nom -->
-         <p:inputText id="name" value="#{userBean.user.nom}" placeholder="Nom complet" required="true" label="Nom">
-            <f:validateLength minimum="3" />
-         </p:inputText>
+            <!-- Name Field -->
+            <p:inputText id="name" value="#{userBean.user.nom}" placeholder="Nom complet" required="true" label="Nom">
+               <f:validateLength minimum="3" />
+            </p:inputText>
 
-         <!-- Champ pour l'email -->
-         <p:inputText id="email" value="#{userBean.user.email}" placeholder="Email" required="true" label="Email">
-            <f:validateRegex pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
-         </p:inputText>
+            <!-- Email Field -->
+            <p:inputText id="email" value="#{userBean.user.email}" placeholder="Email" required="true" label="Email">
+               <f:validateRegex pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+            </p:inputText>
 
-         <!-- Champ pour la date de naissance -->
-         <p:calendar id="dateNaissance" value="#{userBean.user.dateDeNaissance}" placeholder="Date de Naissance"
-                     pattern="yyyy-MM-dd" required="true" showButtonPanel="true" label="Date de Naissance" />
+            <!-- Date of Birth Field -->
+            <p:calendar id="dateNaissance" value="#{userBean.user.dateDeNaissance}" placeholder="Date de Naissance"
+                        pattern="yyyy-MM-dd" required="true" showButtonPanel="true" label="Date de Naissance" />
 
-         <!-- Champ pour le mot de passe -->
-         <p:password id="password" value="#{userBean.user.password}" placeholder="Mot de passe" required="true" label="Mot de Passe">
-            <f:validateLength minimum="6" />
-         </p:password>
+            <!-- Password Field -->
+            <p:password id="password" value="#{userBean.user.password}" placeholder="Mot de passe" required="true" label="Mot de Passe">
+               <f:validateLength minimum="6" />
+            </p:password>
 
-         <!-- Bouton pour soumettre le formulaire -->
-         <p:commandButton value="S'inscrire" icon="pi pi-check" action="#{userBean.registerClient}" />
-      </p:panel>
-   </h:form>
+            <!-- Submit Button -->
+            <p:commandButton value="S'inscrire" icon="pi pi-check" action="#{userBean.registerClient}" />
+         </p:panel>
+      </h:form>
+   </div>
 </h:body>
 </html>

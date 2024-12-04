@@ -5,42 +5,152 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>Modifier Client</title>
+    <!-- Include Font Awesome and Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        /* General Styling */
+        body {
+            background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Gradient Animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container Styling */
+        .container {
+            padding: 20px;
+            max-width: 700px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.4em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Form Grid Styling */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Input and Select Styling */
+        .form-grid input,
+        .form-grid select,
+        .form-grid .p-calendar {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .form-grid label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Buttons Styling */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            background: linear-gradient(145deg, #28a745, #218838);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .buttons button.cancel {
+            background: linear-gradient(145deg, #dc3545, #c82333);
+        }
+
+        .buttons button i {
+            margin-right: 8px;
+        }
+
+        .buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .buttons button.cancel:hover {
+            background: linear-gradient(145deg, #c82333, #a71d2a);
+        }
+    </style>
 </h:head>
 <h:body>
-    <h:form id="editForm">
-        <p:panel header="Modifier les Informations du Client">
-            <h:panelGrid columns="2" cellpadding="5">
-
+    <div class="container">
+        <!-- Page Title -->
+        <h1><i class="fas fa-user-edit"></i> Modifier Client</h1>
+        <h:form id="editForm">
+            <div class="form-grid">
                 <!-- Nom de l'utilisateur -->
-                <h:outputLabel for="nom" value="Nom :" />
-                <h:inputText id="nom" value="#{userBean.user.nom}" required="true" />
+                <!--@declare id="dateDeNaissance"--><label for="nom">Nom :</label>
+                <h:inputText id="nom" value="#{userBean.user.nom}" required="true" label="Nom" />
 
                 <!-- Email de l'utilisateur -->
-                <h:outputLabel for="email" value="Email :" />
-                <h:inputText id="email" value="#{userBean.user.email}" required="true" />
+                <label for="email">Email :</label>
+                <h:inputText id="email" value="#{userBean.user.email}" required="true" label="Email" />
 
                 <!-- Mot de passe de l'utilisateur -->
-                <h:outputLabel for="password" value="Mot de passe :" />
-                <h:inputSecret id="password" value="#{userBean.user.password}" required="true" />
+                <label for="password">Mot de passe :</label>
+                <h:inputSecret id="password" value="#{userBean.user.password}" required="true" label="Mot de Passe" />
 
                 <!-- Rôle de l'utilisateur -->
-                <h:outputLabel for="role" value="Rôle :" />
-                <h:selectOneMenu id="role" value="#{userBean.user.role}">
+                <label for="role">Rôle :</label>
+                <h:selectOneMenu id="role" value="#{userBean.user.role}" label="Rôle">
                     <f:selectItem itemValue="client" itemLabel="Client" />
                     <f:selectItem itemValue="admin" itemLabel="Administrateur" />
                 </h:selectOneMenu>
 
                 <!-- Date de naissance -->
-                <h:outputLabel for="dateNaissance" value="Date de Naissance :" />
+                <label for="dateDeNaissance">Date de Naissance :</label>
                 <p:calendar id="dateNaissance" value="#{userBean.user.dateDeNaissance}"
-                            pattern="dd/MM/yyyy" showButtonPanel="true" showWeek="true" />
+                            pattern="dd/MM/yyyy" showButtonPanel="true" showWeek="true" label="Date de Naissance" />
+            </div>
 
-            </h:panelGrid>
 
-            <!-- Boutons d'action -->
-            <p:commandButton value="Enregistrer" action="#{userBean.saveOrUpdateUser}" update="@form" icon="pi pi-save" />
-            <p:commandButton value="Annuler" action="/admin/adminDashboard.xhtml?faces-redirect=true" icon="pi pi-times" />
-        </p:panel>
-    </h:form>
+            <!-- Buttons -->
+            <div class="buttons">
+                <button type="submit" onclick="#{userBean.saveOrUpdateUser}">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+                <button type="button" class="cancel" onclick="window.location.href='/admin/adminDashboard.xhtml'">
+                    <i class="fas fa-times"></i> Annuler
+                </button>
+            </div>
+        </h:form>
+    </div>
 </h:body>
 </html>

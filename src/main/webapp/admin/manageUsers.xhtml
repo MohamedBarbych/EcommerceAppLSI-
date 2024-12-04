@@ -3,34 +3,117 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>Gestion des Utilisateurs</title>
+    <title>Statistiques</title>
+    <!-- Include Font Awesome and Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        /* General Styling */
+        body {
+            background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Gradient Animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Center Panel */
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.4em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Chart Styling */
+        .chart {
+            margin: 20px 0;
+        }
+
+        /* Labels and Stats */
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            text-align: center;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .stat-box i {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+
+        .stat-box h3 {
+            font-size: 1.2em;
+            color: #444;
+            margin: 10px 0;
+        }
+
+        .stat-box p {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #333;
+        }
+    </style>
 </h:head>
 <h:body>
-    <h:form>
-        <p:panel header="Liste des Utilisateurs">
-            <p:dataTable id="userTable" value="#{userBean.users}" var="user" paginator="true" rows="10">
-                <p:column headerText="ID">
-                    <h:outputText value="#{user.id}" />
-                </p:column>
-                <p:column headerText="Nom">
-                    <h:outputText value="#{user.nom}" />
-                </p:column>
-                <p:column headerText="Email">
-                    <h:outputText value="#{user.email}" />
-                </p:column>
-                <p:column headerText="Rôle">
-                    <h:outputText value="#{user.role}" />
-                </p:column>
-                <p:column headerText="Actions">
-                    <p:commandButton value="Modifier" icon="pi pi-pencil"
-                                     action="#{userBean.prepareEdit(user)}" />
-                    <p:commandButton value="Supprimer" icon="pi pi-trash"
-                                     action="#{userBean.deleteUser(user.id)}"
-                                     update="@form" />
-                </p:column>
-            </p:dataTable>
+    <div class="container">
+        <!-- Page Title -->
+        <h1><i class="fas fa-chart-pie"></i> Statistiques des Utilisateurs</h1>
 
-        </p:panel>
-    </h:form>
+        <!-- Chart -->
+        <h:form>
+            <p:chart type="pie" model="#{userBean.loadStatistics()}" styleClass="chart" style="width: 500px; height: 400px;" />
+        </h:form>
+
+        <!-- User Statistics -->
+        <div class="stats-container">
+            <div class="stat-box">
+                <i class="fas fa-users"></i>
+                <h3>Total Utilisateurs</h3>
+                <p>#{userBean.totalUsers}</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-user-shield"></i>
+                <h3>Admins</h3>
+                <p>#{userBean.adminCount}</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-user"></i>
+                <h3>Clients</h3>
+                <p>#{userBean.clientCount}</p>
+            </div>
+        </div>
+    </div>
 </h:body>
 </html>

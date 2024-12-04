@@ -2,11 +2,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:body>
-    <h:panelGroup>
-        <h:outputLink value="index.xhtml">Accueil</h:outputLink> |
-        <h:outputLink value="client/clientDashboard.xhtml">Produits</h:outputLink> |
-        <h:outputLink value="client/cart.xhtml">Mon Panier</h:outputLink> |
+    <style>
+        /* Header Styling */
+        .navbar {
+            background: linear-gradient(145deg, #4facfe, #00f2fe);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #e3e3e3;
+        }
+
+        .navbar a.active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+
+    <div class="navbar">
+        <h:outputLink value="index.xhtml" class="active">Accueil</h:outputLink>
+        <h:outputLink value="client/clientDashboard.xhtml">Produits</h:outputLink>
+        <h:outputLink value="client/cart.xhtml">Mon Panier</h:outputLink>
         <h:outputLink value="admin/adminDashboard.xhtml">Admin Dashboard</h:outputLink>
-    </h:panelGroup>
+    </div>
 </h:body>
 </html>

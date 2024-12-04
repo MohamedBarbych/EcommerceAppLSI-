@@ -4,26 +4,165 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
    <title>Gestion des Produits</title>
+   <!-- Include Font Awesome and Google Fonts -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+   <style>
+      /* General Styling */
+      body {
+         background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+         background-size: 400% 400%;
+         animation: gradientBG 8s ease infinite;
+         font-family: 'Montserrat', sans-serif;
+         margin: 0;
+         padding: 0;
+      }
+
+      /* Gradient Animation */
+      @keyframes gradientBG {
+         0% { background-position: 0% 50%; }
+         50% { background-position: 100% 50%; }
+         100% { background-position: 0% 50%; }
+      }
+
+      /* Container Styling */
+      .container {
+         padding: 20px;
+         max-width: 900px;
+         margin: auto;
+         background: rgba(255, 255, 255, 0.9);
+         border-radius: 15px;
+         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+         text-align: center;
+         font-size: 2.4em;
+         color: #333;
+         margin-bottom: 20px;
+         font-weight: 700;
+         letter-spacing: 1.5px;
+         text-transform: uppercase;
+      }
+
+      /* Form Styling */
+      .form-panel {
+         background: #f9f9f9;
+         padding: 20px;
+         border-radius: 15px;
+         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+         margin-bottom: 30px;
+      }
+
+      .form-panel input {
+         width: 100%;
+         padding: 10px;
+         margin: 10px 0;
+         border: 1px solid #ccc;
+         border-radius: 8px;
+         font-size: 1em;
+      }
+
+      .form-panel button {
+         background: linear-gradient(145deg, #28a745, #218838);
+         color: #fff;
+         padding: 10px 20px;
+         border: none;
+         border-radius: 8px;
+         font-size: 1.1em;
+         font-weight: 600;
+         cursor: pointer;
+         transition: all 0.3s ease-in-out;
+         display: inline-flex;
+         align-items: center;
+      }
+
+      .form-panel button i {
+         margin-right: 8px;
+      }
+
+      .form-panel button:hover {
+         background: linear-gradient(145deg, #218838, #28a745);
+         transform: translateY(-2px);
+         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* DataTable Styling */
+      .ui-datatable {
+         width: 100%;
+         border-collapse: collapse;
+      }
+
+      .ui-datatable th {
+         background: linear-gradient(145deg, #4facfe, #00f2fe);
+         color: #fff;
+         font-weight: 700;
+         text-transform: uppercase;
+         text-align: center;
+         padding: 12px 15px;
+      }
+
+      .ui-datatable td {
+         background: #fff;
+         color: #333;
+         text-align: center;
+         padding: 12px 15px;
+      }
+
+      .ui-datatable tr:nth-child(even) td {
+         background: #f9f9f9;
+      }
+   </style>
 </h:head>
 <h:body>
-   <h:form>
-      <p:panel header="Ajouter un Produit">
-         <p:inputText id="nom" value="#{produitBean.produit.nom}" placeholder="Nom du produit" />
-         <p:inputText id="prix" value="#{produitBean.produit.prix}" placeholder="Prix" />
-         <p:inputText id="stock" value="#{produitBean.produit.stock}" placeholder="Stock" />
-         <p:commandButton value="Ajouter" icon="pi pi-check" action="#{produitBean.saveProduit}" />
-      </p:panel>
-      <p:dataTable value="#{produitBean.produits}" var="produit" paginator="true" rows="10">
-         <p:column headerText="Nom">
-            <h:outputText value="#{produit.nom}" />
-         </p:column>
-         <p:column headerText="Prix">
-            <h:outputText value="#{produit.prix}" />
-         </p:column>
-         <p:column headerText="Stock">
-            <h:outputText value="#{produit.stock}" />
-         </p:column>
-      </p:dataTable>
-   </h:form>
+   <div class="container">
+      <!-- Page Title -->
+      <h1><i class="fas fa-box"></i> Gestion des Produits</h1>
+
+      <!-- Form Panel -->
+      <div class="form-panel">
+         <h:form>
+            <!-- Input for Product Name -->
+            <div>
+               <input type="text" id="nom" placeholder="Nom du produit" value="#{produitBean.produit.nom}" />
+            </div>
+
+            <!-- Input for Product Price -->
+            <div>
+               <input type="text" id="prix" placeholder="Prix" value="#{produitBean.produit.prix}" />
+            </div>
+
+            <!-- Input for Product Stock -->
+            <div>
+               <input type="text" id="stock" placeholder="Stock" value="#{produitBean.produit.stock}" />
+            </div>
+
+            <!-- Add Product Button -->
+            <button onclick="#{produitBean.saveProduit}">
+               <i class="fas fa-check"></i> Ajouter
+            </button>
+         </h:form>
+      </div>
+
+      <!-- Data Table -->
+      <h:form>
+         <p:dataTable value="#{produitBean.produits}" var="produit" paginator="true" rows="10">
+            <!-- Name Column -->
+            <p:column headerText="Nom">
+               <h:outputText value="#{produit.nom}" />
+            </p:column>
+
+            <!-- Price Column -->
+            <p:column headerText="Prix">
+               <h:outputText value="#{produit.prix}" />
+            </p:column>
+
+            <!-- Stock Column -->
+            <p:column headerText="Stock">
+               <h:outputText value="#{produit.stock}" />
+            </p:column>
+         </p:dataTable>
+      </h:form>
+   </div>
 </h:body>
 </html>

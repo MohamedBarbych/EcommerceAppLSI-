@@ -4,16 +4,116 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
    <title>Confirmation d'Inscription</title>
+   <!-- Include Font Awesome and Google Fonts -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+   <style>
+      /* Background Styling */
+      body {
+         background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+         background-size: 400% 400%;
+         animation: gradientBG 8s ease infinite;
+         font-family: 'Montserrat', sans-serif;
+         margin: 0;
+         padding: 0;
+      }
+
+      /* Gradient Animation */
+      @keyframes gradientBG {
+         0% { background-position: 0% 50%; }
+         50% { background-position: 100% 50%; }
+         100% { background-position: 0% 50%; }
+      }
+
+      /* Center the panel */
+      .center-panel {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         padding: 20px;
+      }
+
+      /* Panel Styling */
+      .custom-panel {
+         background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(245, 245, 245, 0.9));
+         border-radius: 25px;
+         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3); /* Depth Effect */
+         padding: 50px 40px;
+         text-align: center;
+         max-width: 500px;
+         width: 100%;
+      }
+
+      /* Header Styling */
+      .custom-panel h2 {
+         font-size: 2.6em;
+         color: #333;
+         margin-bottom: 20px;
+         font-weight: 700;
+         text-transform: uppercase;
+         letter-spacing: 1.5px;
+      }
+
+      /* Confirmation Text Styling */
+      .custom-panel h\:outputText {
+         font-size: 1.4em;
+         color: #444;
+         margin-bottom: 30px;
+         font-weight: 500;
+         line-height: 1.6;
+      }
+
+      /* Button Styling */
+      .custom-panel p\:commandButton {
+         margin: 20px 0;
+         width: 100%;
+         padding: 15px;
+         font-size: 1.3em;
+         font-weight: 600;
+         border-radius: 15px;
+         border: none;
+         cursor: pointer;
+         transition: all 0.3s ease-in-out;
+         text-transform: uppercase;
+         letter-spacing: 1px;
+         background: linear-gradient(145deg, #4caf50, #43a047);
+         color: #fff;
+         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .custom-panel p\:commandButton:hover {
+         background: linear-gradient(145deg, #43a047, #4caf50);
+         transform: translateY(-2px);
+         box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Placeholder Styling */
+      .custom-panel ::placeholder {
+         color: #aaa;
+         font-size: 0.95em;
+      }
+
+      /* Font Awesome Icon Styling */
+      .custom-panel p\:commandButton i {
+         margin-right: 10px;
+         font-size: 1.5em;
+      }
+   </style>
 </h:head>
 <h:body>
-   <h:form>
-      <p:panel header="Inscription réussie">
-         <h:outputText value="Félicitations ! Vous êtes désormais inscrit en tant que client." />
+   <div class="center-panel">
+      <h:form>
+         <p:panel class="custom-panel">
+            <h2>Inscription Réussie</h2>
+            <h:outputText value="Félicitations ! Vous êtes désormais inscrit en tant que client." />
 
-         <p:commandButton value="Retour au Tableau de Bord"
-                          action="/client/clientDashboard.xhtml?faces-redirect=true"
-                          icon="pi pi-check" />
-      </p:panel>
-   </h:form>
+            <!-- Return to Dashboard Button -->
+            <p:commandButton value="Retour au Tableau de Bord"
+                             action="/client/clientDashboard.xhtml?faces-redirect=true"
+                             icon="pi pi-check" />
+         </p:panel>
+      </h:form>
+   </div>
 </h:body>
 </html>

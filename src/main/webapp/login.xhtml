@@ -4,15 +4,144 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Connexion</title>
+    <!-- Include Font Awesome and Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        /* Background Styling */
+        body {
+            background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Gradient Animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Center the panel */
+        .center-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Panel Styling */
+        .custom-panel {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(245, 245, 245, 0.9));
+            border-radius: 25px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3); /* Depth Effect */
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Header Styling */
+        .custom-panel h2 {
+            font-size: 2.6em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Input Field Styling */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            color: #888;
+        }
+
+        .custom-panel p\:inputText,
+        .custom-panel p\:password {
+            width: 100%;
+            padding: 15px 15px 15px 45px; /* Adjust padding for icons */
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            font-size: 1.1em;
+            box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .custom-panel p\:inputText:focus,
+        .custom-panel p\:password:focus {
+            border-color: #007bff;
+            box-shadow: inset 0px 3px 6px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+
+        /* Button Styling */
+        .custom-panel p\:commandButton {
+            margin: 20px 0;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.3em;
+            font-weight: 600;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(145deg, #4facfe, #00f2fe);
+            color: #fff;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-panel p\:commandButton:hover {
+            background: linear-gradient(145deg, #00f2fe, #4facfe);
+            transform: translateY(-2px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Placeholder Styling */
+        .custom-panel ::placeholder {
+            color: #aaa;
+            font-size: 0.95em;
+        }
+    </style>
 </h:head>
 <h:body>
-    <h:form>
-        <p:panel header="Connexion">
-            <p:messages autoUpdate="true" />
-            <p:inputText id="email" value="#{userBean.user.email}" placeholder="Email" />
-            <p:password id="password" value="#{userBean.user.password}" placeholder="Mot de passe" />
-            <p:commandButton value="Se connecter" icon="pi pi-sign-in" action="#{userBean.authenticate}" />
-        </p:panel>
-    </h:form>
+    <div class="center-panel">
+        <h:form>
+            <p:panel class="custom-panel">
+                <h2>Connexion</h2>
+                <p:messages autoUpdate="true" />
+
+                <!-- Email Field with Icon -->
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <p:inputText id="email" value="#{userBean.user.email}" placeholder="Email" />
+                </div>
+
+                <!-- Password Field with Icon -->
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <p:password id="password" value="#{userBean.user.password}" placeholder="Mot de passe" />
+                </div>
+
+                <!-- Submit Button -->
+                <p:commandButton value="Se connecter" icon="pi pi-sign-in" action="#{userBean.authenticate}" />
+            </p:panel>
+        </h:form>
+    </div>
 </h:body>
 </html>
