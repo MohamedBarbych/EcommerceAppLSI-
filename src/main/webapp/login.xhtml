@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Connexion</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Connexion">
+            <p:messages autoUpdate="true" />
+            <p:inputText id="email" value="#{userBean.user.email}" placeholder="Email" />
+            <p:password id="password" value="#{userBean.user.password}" placeholder="Mot de passe" />
+            <p:commandButton value="Se connecter" icon="pi pi-sign-in" action="#{userBean.authenticate}" />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+   <title>Inscription</title>
+</h:head>
+<h:body>
+   <h:form>
+      <p:panel header="Inscription">
+         <!-- Messages pour afficher les erreurs ou confirmations -->
+         <p:messages autoUpdate="true" />
+
+         <!-- Champ pour le nom -->
+         <p:inputText id="name" value="#{userBean.user.nom}" placeholder="Nom complet" required="true" label="Nom">
+            <f:validateLength minimum="3" />
+         </p:inputText>
+
+         <!-- Champ pour l'email -->
+         <p:inputText id="email" value="#{userBean.user.email}" placeholder="Email" required="true" label="Email">
+            <f:validateRegex pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+         </p:inputText>
+
+         <!-- Champ pour la date de naissance -->
+         <p:calendar id="dateNaissance" value="#{userBean.user.dateDeNaissance}" placeholder="Date de Naissance"
+                     pattern="yyyy-MM-dd" required="true" showButtonPanel="true" label="Date de Naissance" />
+
+         <!-- Champ pour le mot de passe -->
+         <p:password id="password" value="#{userBean.user.password}" placeholder="Mot de passe" required="true" label="Mot de Passe">
+            <f:validateLength minimum="6" />
+         </p:password>
+
+         <!-- Bouton pour soumettre le formulaire -->
+         <p:commandButton value="S'inscrire" icon="pi pi-check" action="#{userBean.registerClient}" />
+      </p:panel>
+   </h:form>
+</h:body>
+</html>

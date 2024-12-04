@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <title>Tableau de Bord Admin</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</h:head>
+<h:body>
+   <h:form>
+      <p:panel header="Gestion des Utilisateurs">
+         <!-- Barre de recherche dynamique -->
+         <p:inputText id="search" placeholder="Rechercher par nom" value="#{userBean.searchQuery}"
+                      onkeyup="PF('userTable').filter()" style="width: 50%; margin-bottom: 10px;" />
+
+         <!-- Tableau des utilisateurs -->
+         <p:dataTable id="userTable" value="#{userBean.users}" var="user" paginator="true" rows="10"
+                      widgetVar="userTable" filterBy="#{user.nom}">
+            <!-- ID de l'utilisateur -->
+            <p:column headerText="ID">
+               <h:outputText value="#{user.id}" />
+            </p:column>
+
+            <!-- Nom de l'utilisateur -->
+            <p:column headerText="Nom" filterable="true">
+               <h:outputText value="#{user.nom}" />
+            </p:column>
+
+            <!-- Date de Naissance -->
+            <p:column headerText="Date de Naissance">
+               <h:outputText value="#{user.dateDeNaissance}" />
+            </p:column>
+
+            <!-- Email de l'utilisateur -->
+            <p:column headerText="Email">
+               <h:outputText value="#{user.email}" />
+            </p:column>
+
+            <!-- Rôle de l'utilisateur -->
+            <p:column headerText="Rôle">
+               <h:outputText value="#{user.role}" />
+            </p:column>
+
+            <!-- Actions : Modifier et Supprimer -->
+            <p:column headerText="Actions">
+               <p:commandButton value="Modifier" icon="pi pi-pencil"
+                                action="#{userBean.prepareEdit(user)}" />
+               <p:commandButton value="Supprimer" icon="pi pi-trash"
+                                action="#{userBean.deleteUser(user.id)}"
+                                update="@form" />
+            </p:column>
+         </p:dataTable>
+
+         <!-- Bouton pour ajouter un administrateur -->
+         <p:commandButton value="Ajouter Administrateur"
+                          action="/admin/addAdmin.xhtml?faces-redirect=true"
+                          icon="pi pi-user-plus" style="margin-top: 10px;" />
+      </p:panel>
+   </h:form>
+</h:body>
+</html>

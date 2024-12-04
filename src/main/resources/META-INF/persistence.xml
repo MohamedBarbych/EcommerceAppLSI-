@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="ecommercePU">
+        <!-- Entities -->
+        <class>ma.fstt.model.User</class>
+        <class>ma.fstt.model.Panier</class>
+        <class>ma.fstt.model.Produit</class>
+        <class>ma.fstt.model.LignePanier</class>        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/EcommerceLSI"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+
+            <!-- EclipseLink DDL generation settings -->
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+        <property name="eclipselink.logging.level" value="FINE" />
+        <property name="eclipselink.logging.parameters" value="true" />
+
+            <!-- Show SQL for debugging -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+
+
+        </properties>
+
+    </persistence-unit>
+</persistence>

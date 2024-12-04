@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Gestion des Utilisateurs</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Liste des Utilisateurs">
+            <p:dataTable id="userTable" value="#{userBean.users}" var="user" paginator="true" rows="10">
+                <p:column headerText="ID">
+                    <h:outputText value="#{user.id}" />
+                </p:column>
+                <p:column headerText="Nom">
+                    <h:outputText value="#{user.nom}" />
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{user.email}" />
+                </p:column>
+                <p:column headerText="Rôle">
+                    <h:outputText value="#{user.role}" />
+                </p:column>
+                <p:column headerText="Actions">
+                    <p:commandButton value="Modifier" icon="pi pi-pencil"
+                                     action="#{userBean.prepareEdit(user)}" />
+                    <p:commandButton value="Supprimer" icon="pi pi-trash"
+                                     action="#{userBean.deleteUser(user.id)}"
+                                     update="@form" />
+                </p:column>
+            </p:dataTable>
+
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

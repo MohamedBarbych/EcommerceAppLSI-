@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Statistiques</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:panel header="Statistiques des Utilisateurs">
+            <p:chart type="pie" model="#{userBean.loadStatistics()}" style="width: 500px; height: 400px;" />
+            <p:outputLabel value="Nombre total d'utilisateurs : #{userBean.totalUsers}" />
+            <p:outputLabel value="Admins : #{userBean.adminCount}" />
+            <p:outputLabel value="Clients : #{userBean.clientCount}" />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
