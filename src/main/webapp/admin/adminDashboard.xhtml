@@ -80,12 +80,15 @@
 </h:head>
 <h:body>
    <h:form>
-      <p:panel class="custom-panel" header="Gestion des Utilisateurs">
+      <p:panel class="custom-panel" header="Tableau de Bord">
          <!-- Barre de recherche dynamique -->
          <p:inputText id="search" placeholder="Rechercher par nom" value="#{userBean.searchQuery}"
                       styleClass="search-bar"
                       onkeyup="PF('userTableWidget').filter()" />
-
+         <!-- Bouton pour ajouter un administrateur -->
+         <button class="add-button" onclick="window.location.href='/admin/addAdmin.xhtml'">
+            <i class="fas fa-user-plus"></i> Ajouter Administrateur
+         </button>
          <!-- Tableau des utilisateurs -->
          <p:dataTable id="userTable" value="#{userBean.users}" var="user" paginator="true" rows="10"
                       widgetVar="userTableWidget" styleClass="custom-table">
@@ -126,10 +129,7 @@
             </p:column>
          </p:dataTable>
 
-         <!-- Bouton pour ajouter un administrateur -->
-         <button class="add-button" onclick="window.location.href='/admin/addAdmin.xhtml'">
-            <i class="fas fa-user-plus"></i> Ajouter Administrateur
-         </button>
+
       </p:panel>
    </h:form>
 </h:body>

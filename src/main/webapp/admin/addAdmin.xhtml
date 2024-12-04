@@ -1,11 +1,117 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+<h:head>
+    <title>Ajouter un Administrateur</title>
+    <!-- Include Font Awesome and Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        body {
+            background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .form-grid input,
+        .form-grid button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+
+        .form-grid input {
+            background: #fff;
+        }
+
+        .form-grid button {
+            background: linear-gradient(145deg, #28a745, #218838);
+            color: white;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-grid button i {
+            margin-right: 8px;
+        }
+
+        .form-grid button:hover {
+            background: linear-gradient(145deg, #218838, #28a745);
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="container">
+        <h1><i class="fas fa-user-plus"></i> Ajouter un Administrateur</h1>
+        <h:form>
+            <!-- Input Fields -->
+            <div class="form-grid">
+                <!-- Nom -->
+                <h:inputText id="nom" value="#{userBean.user.nom}" required="true" placeholder="Nom complet" />
+                <!-- Email -->
+                <h:inputText id="email" value="#{userBean.user.email}" required="true" placeholder="Email" />
+                <!-- Mot de Passe -->
+                <h:inputSecret id="password" value="#{userBean.user.password}" required="true" placeholder="Mot de passe" />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-grid">
+                <button type="submit" onclick="#{userBean.addAdmin}">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+                <button type="button" onclick="window.location.href='/admin/adminDashboard.xhtml'" style="background: linear-gradient(145deg, #dc3545, #c82333); color: white;">
+                    <i class="fas fa-times"></i> Annuler
+                </button>
+            </div>
+        </h:form>
+    </div>
+</h:body>
 </html>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
    <title>Client Dashboard</title>
    <!-- Include Font Awesome and Google Fonts -->
@@ -107,33 +108,20 @@
    <div class="container">
       <h1>Produits Disponibles</h1>
       <h:form>
-         <table>
-            <thead>
-            <tr>
-               <th>Nom</th>
-               <th>Prix</th>
-               <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <h:dataTable value="#{produitBean.produits}" var="produit" border="0">
-               <h:column>
-                  <f:facet name="header">Nom</f:facet>
-                  #{produit.nom}
-               </h:column>
-               <h:column>
-                  <f:facet name="header">Prix</f:facet>
-                  #{produit.prix} €
-               </h:column>
-               <h:column>
-                  <f:facet name="header">Action</f:facet>
-                  <button class="action-button" onclick="#{lignePanierBean.addLignePanier}">
-                     <i class="fas fa-cart-plus"></i> Ajouter au Panier
-                  </button>
-               </h:column>
-            </h:dataTable>
-            </tbody>
-         </table>
+         <p:dataTable value="#{produitBean.produits}" var="produit" paginator="true" rows="10">
+            <p:column headerText="Nom">
+               <h:outputText value="#{produit.nom}" />
+            </p:column>
+            <p:column headerText="Prix">
+               <h:outputText value="#{produit.prix} €" />
+            </p:column>
+            <p:column headerText="Action">
+               <p:commandButton value="Ajouter au Panier"
+                                icon="pi pi-cart-plus"
+                                action="#{lignePanierBean.addLignePanier(produit)}"
+                                update="@form" />
+            </p:column>
+         </p:dataTable>
       </h:form>
    </div>
 </h:body>
