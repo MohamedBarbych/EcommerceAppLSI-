@@ -4,133 +4,143 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
    <title>Tableau de Bord Admin</title>
-   <!-- Include Font Awesome -->
+   <!-- Include Font Awesome and Google Fonts -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet" />
    <style>
+      /* General Styling */
       body {
          background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
          background-size: 400% 400%;
-         animation: gradientBG 10s ease infinite;
+         animation: gradientBG 8s ease infinite;
          font-family: 'Montserrat', sans-serif;
          margin: 0;
          padding: 0;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
       }
 
+      /* Gradient Animation */
       @keyframes gradientBG {
          0% { background-position: 0% 50%; }
          50% { background-position: 100% 50%; }
          100% { background-position: 0% 50%; }
       }
 
-      .custom-panel {
-         background: rgba(255, 255, 255, 0.9);
-         border-radius: 15px;
-         box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
-         padding: 20px;
-         margin: 20px auto;
-         max-width: 90%;
-      }
-
-      .custom-table th {
-         background: linear-gradient(145deg, #4facfe, #00f2fe);
-         color: white;
-         text-align: center;
-         padding: 12px 15px;
-      }
-
-      .custom-table td {
-         text-align: center;
-         padding: 12px 15px;
-      }
-
-      .search-bar {
-         width: 100%;
+      /* Container Styling */
+      .container {
+         padding: 30px;
          max-width: 400px;
-         margin: 10px auto 20px;
-         padding: 10px;
-         border: 1px solid #ccc;
-         border-radius: 10px;
+         background: rgba(255, 255, 255, 0.95);
+         border-radius: 15px;
+         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+         text-align: center;
       }
 
-      .add-button {
-         background: linear-gradient(145deg, #28a745, #218838);
-         color: white;
-         padding: 10px 20px;
+      h1 {
+         font-size: 2em;
+         color: #333;
+         margin-bottom: 30px;
+         font-weight: 700;
+         letter-spacing: 1.5px;
+         text-transform: uppercase;
+      }
+
+      /* Button Styling */
+      .action-button {
+         color: #fff;
+         padding: 12px 20px;
          border: none;
          border-radius: 8px;
-         font-size: 1.1em;
-         font-weight: bold;
+         font-size: 1em;
+         font-weight: 600;
          cursor: pointer;
+         margin: 15px 0;
          transition: all 0.3s ease-in-out;
-         display: inline-flex;
+         text-transform: uppercase;
+         display: flex;
          align-items: center;
-         margin-top: 15px;
+         justify-content: center;
+         text-decoration: none;
       }
 
-      .add-button i {
-         margin-right: 10px;
+      /* Individual Button Colors */
+      .users-button {
+         background: linear-gradient(145deg, #007bff, #0056b3);
       }
 
-      .add-button:hover {
+      .users-button:hover {
+         background: linear-gradient(145deg, #0056b3, #007bff);
+         transform: translateY(-2px);
+         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .products-button {
+         background: linear-gradient(145deg, #28a745, #218838);
+      }
+
+      .products-button:hover {
          background: linear-gradient(145deg, #218838, #28a745);
          transform: translateY(-2px);
-         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .stats-button {
+         background: linear-gradient(145deg, #ffc107, #e0a800);
+      }
+
+      .stats-button:hover {
+         background: linear-gradient(145deg, #e0a800, #ffc107);
+         transform: translateY(-2px);
+         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .logout-button {
+         background: linear-gradient(145deg, #dc3545, #c82333);
+      }
+
+      .logout-button:hover {
+         background: linear-gradient(145deg, #c82333, #dc3545);
+         transform: translateY(-2px);
+         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Button Icons */
+      .action-button i {
+         margin-right: 10px;
       }
    </style>
 </h:head>
 <h:body>
-   <h:form>
-      <p:panel class="custom-panel" header="Tableau de Bord">
-         <!-- Barre de recherche dynamique -->
-         <p:inputText id="search" placeholder="Rechercher par nom" value="#{userBean.searchQuery}"
-                      styleClass="search-bar"
-                      onkeyup="PF('userTableWidget').filter()" />
-         <!-- Bouton pour ajouter un administrateur -->
-         <button class="add-button" onclick="window.location.href='/admin/addAdmin.xhtml'">
-            <i class="fas fa-user-plus"></i> Ajouter Administrateur
-         </button>
-         <!-- Tableau des utilisateurs -->
-         <p:dataTable id="userTable" value="#{userBean.users}" var="user" paginator="true" rows="10"
-                      widgetVar="userTableWidget" styleClass="custom-table">
-            <!-- ID de l'utilisateur -->
-            <p:column headerText="ID">
-               <h:outputText value="#{user.id}" />
-            </p:column>
+   <div class="container">
+      <h1>Admin Dashboard</h1>
+      <h:form>
+         <!-- Button for Manage Users -->
+         <p:commandButton value="Gérer les Utilisateurs"
+                          action="/admin/manageUsers.xhtml?faces-redirect=true"
+                          icon="pi pi-users"
+                          styleClass="action-button users-button" />
 
-            <!-- Nom de l'utilisateur -->
-            <p:column headerText="Nom">
-               <h:outputText value="#{user.nom}" />
-            </p:column>
+         <!-- Button for Manage Products -->
+         <p:commandButton value="Gérer les Produits"
+                          action="/admin/manageProducts.xhtml?faces-redirect=true"
+                          icon="pi pi-box"
+                          styleClass="action-button products-button" />
 
-            <!-- Date de Naissance -->
-            <p:column headerText="Date de Naissance">
-               <h:outputText value="#{user.dateDeNaissance}" />
-            </p:column>
+         <!-- Button for Statistics -->
+         <p:commandButton value="Voir les Statistiques"
+                          action="/admin/statistics.xhtml?faces-redirect=true"
+                          icon="pi pi-chart-bar"
+                          styleClass="action-button stats-button" />
 
-            <!-- Email de l'utilisateur -->
-            <p:column headerText="Email">
-               <h:outputText value="#{user.email}" />
-            </p:column>
-
-            <!-- Rôle de l'utilisateur -->
-            <p:column headerText="Rôle">
-               <h:outputText value="#{user.role}" />
-            </p:column>
-
-            <!-- Actions : Modifier et Supprimer -->
-            <p:column headerText="Actions">
-               <!-- Bouton Modifier -->
-               <p:commandButton value="Modifier" icon="pi pi-pencil"
-                                action="#{userBean.prepareEdit(user)}" />
-               <!-- Bouton Supprimer -->
-               <p:commandButton value="Supprimer" icon="pi pi-trash"
-                                action="#{userBean.deleteUser(user.id)}"
-                                update="@form" />
-            </p:column>
-         </p:dataTable>
-
-
-      </p:panel>
-   </h:form>
+         <!-- Logout Button -->
+         <p:commandButton value="Déconnexion"
+                          action="/index.xhtml?faces-redirect=true"
+                          icon="pi pi-power-off"
+                          styleClass="action-button logout-button" />
+      </h:form>
+   </div>
 </h:body>
 </html>

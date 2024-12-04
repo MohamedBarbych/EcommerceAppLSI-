@@ -120,33 +120,31 @@
       <h1><i class="fas fa-box"></i> Gestion des Produits</h1>
 
       <!-- Form Panel -->
-      <div class="form-panel">
-         <h:form>
+      <h:form id="formAddProduct">
+         <div class="form-panel">
             <!-- Input for Product Name -->
             <div>
-               <input type="text" id="nom" placeholder="Nom du produit" value="#{produitBean.produit.nom}" />
+               <p:inputText id="nom" value="#{produitBean.produit.nom}" placeholder="Nom du produit" />
             </div>
 
             <!-- Input for Product Price -->
             <div>
-               <input type="text" id="prix" placeholder="Prix" value="#{produitBean.produit.prix}" />
+               <p:inputText id="prix" value="#{produitBean.produit.prix}" placeholder="Prix" />
             </div>
 
             <!-- Input for Product Stock -->
             <div>
-               <input type="text" id="stock" placeholder="Stock" value="#{produitBean.produit.stock}" />
+               <p:inputText id="stock" value="#{produitBean.produit.stock}" placeholder="Stock" />
             </div>
 
             <!-- Add Product Button -->
-            <button onclick="#{produitBean.saveProduit}">
-               <i class="fas fa-check"></i> Ajouter
-            </button>
-         </h:form>
-      </div>
+            <p:commandButton value="Ajouter" icon="pi pi-check" action="#{produitBean.saveProduit}" update=":formViewProducts:productTable" />
+         </div>
+      </h:form>
 
       <!-- Data Table -->
-      <h:form>
-         <p:dataTable value="#{produitBean.produits}" var="produit" paginator="true" rows="10">
+      <h:form id="formViewProducts">
+         <p:dataTable id="productTable" value="#{produitBean.produits}" var="produit" paginator="true" rows="10">
             <!-- Name Column -->
             <p:column headerText="Nom">
                <h:outputText value="#{produit.nom}" />
