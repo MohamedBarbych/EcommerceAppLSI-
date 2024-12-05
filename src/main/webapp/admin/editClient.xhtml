@@ -143,9 +143,8 @@
 
             <!-- Buttons -->
             <div class="buttons">
-                <button type="submit" onclick="#{userBean.saveOrUpdateUser}">
-                    <i class="fas fa-save"></i> Enregistrer
-                </button>
+                <p:commandButton value="Enregistrer" icon="fas fa-save" action="#{userBean.prepareEdit()}" />
+
                 <button type="button" class="cancel" onclick="window.location.href='/admin/adminDashboard.xhtml'">
                     <i class="fas fa-times"></i> Annuler
                 </button>

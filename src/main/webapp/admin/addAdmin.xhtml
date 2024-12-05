@@ -104,9 +104,8 @@
 
             <!-- Submit Button -->
             <div class="form-grid">
-                <button type="submit" onclick="#{userBean.addAdmin}">
-                    <i class="fas fa-save"></i> Enregistrer
-                </button>
+
+                <p:commandButton value="Enregistrer" icon="fas fa-save" action="#{userBean.addAdmin}" />
                 <button type="button" onclick="window.location.href='/admin/adminDashboard.xhtml'" style="background: linear-gradient(145deg, #dc3545, #c82333); color: white;">
                     <i class="fas fa-times"></i> Annuler
                 </button>

@@ -125,9 +125,8 @@
             </p:dataTable>
 
             <!-- Finalize Button -->
-            <button class="finalize-button" onclick="#{panierBean.finalizeCart}">
-                <i class="fas fa-shopping-cart"></i> Finaliser la commande
-            </button>
+            <p:commandButton value="Finaliser la commande" icon="fas fa-shopping-cart" action="#{panierBean.finalizeCart}" />
+
         </h:form>
     </div>
 </h:body>
